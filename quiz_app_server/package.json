@@ -1,0 +1,23 @@
+{
+  "name": "quiz_app_server",
+  "version": "1.0.0",
+  "description": "this server is dedicated for quiz application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DovileMel/quiz-app.git"
+  },
+  "author": "Dovile Melynyte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DovileMel/quiz-app/issues"
+  },
+  "homepage": "https://github.com/DovileMel/quiz-app#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
