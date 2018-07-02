@@ -3,24 +3,94 @@
         "answered": false,
         "questions": [
             {
-                "question": "What is the capital of Fiji ?",
+                "question": "What is the capital of Fiji?",
                 "possible_answers": [
-                    {
-                        "Suva": true
-                    },
-                    {
-                        "Vilnius": false
-                    },
-                    {
-                        "Tuvalu": false
-                    },
-                    {
-                        "Fiji": false
-                    }
+                    {"Suva": true},
+                    {"Vilnius": false},
+                    {"Tuvalu": false},
+                    {"Fiji": false}
                 ]
             },
             {
-
+                "question": "What is one quarter of 1,000?",
+                "possible_answers": [
+                    {"500": false},
+                    {"250": true},
+                    {"300": false},
+                    {"350": false}
+                ]    
+            },
+             {
+                "question": "What is the name of the Indian holy river?",
+                "possible_answers": [
+                    {"Nile": false},
+                    {"Rhine": false},
+                    {"Danube": false},
+                    {"Ganges": true}
+                ]    
+            },
+             {
+                "question": "Which planet is nearest the sun?",
+                "possible_answers": [
+                    {"Uranus": false},
+                    {"Mars": false},
+                    {"Venus": false},
+                    {"Mercury": true}
+                ]    
+            },
+             {
+                "question": "In which city did Romeo and Julia live?",
+                "possible_answers": [
+                    {"Paris": false},
+                    {"Rome": false},
+                    {"Verona": true},
+                    {"Florence": false}
+                ]    
+            },
+             {
+                "question": "Which 2 animals are in danger of extintion?",
+                "possible_answers": [
+                    {"Giant tortoise": true},
+                    {"Polar bear": true},
+                    {"Adelie Penguin": false},
+                    {"Capybara": false}
+                ]    
+            },
+             {
+                "question": "Which countries are in Africa?",
+                "possible_answers": [
+                    {"Burundi": true},
+                    {"Togo": true},
+                    {"Haiti": false},
+                    {"Chad": true}
+                ]    
+            },
+             {
+                "question": "Which 2 gods are Greek mythological figures?",
+                "possible_answers": [
+                    {"Apollo": true},
+                    {"Athena": true},
+                    {"Thor": false},
+                    {"Jupiter": false}
+                ]    
+            },
+             {
+                "question": "Which are the primary colors?",
+                "possible_answers": [
+                    {"Green": false},
+                    {"Yellow": true},
+                    {"Blue": true},
+                    {"Red": true}
+                ]    
+            },
+             {
+                "question": "Select all dog breeds.",
+                "possible_answers": [
+                    {"Boxer": true},
+                    {"Birman": false},
+                    {"Ragdoll": false},
+                    {"Akita": true}
+                ]    
             }
         ]
     }

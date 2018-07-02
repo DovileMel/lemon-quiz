@@ -2,7 +2,7 @@ const fs = require('fs');
 const questionnaire_data = 'data/questionnaire.txt';
 const users_data = 'data/users_answers.txt';
 
-function addUserData(body){
+function addUserData(body) {
     let all_users_data = JSON.parse(fs.readFileSync(users_data));
     all_users_data.push(body);
     let file = fs.createWriteStream(users_data);
@@ -13,17 +13,17 @@ function addUserData(body){
 
 
 module.exports = function (router) {
-    
-        router.route('/questionnaire/')
-            
-            .post(function (req, res) {
-                console.log('questionnaire submitted');
-                res.status(200).json(addUserData(req.body));
-            })
 
-            .get(function (req, res) {
-                console.log('get questionnaire')
-                res.status(401).json(JSON.parse(fs.readFileSync(questionnaire_data)));
-              })
-        
-    }
+    router.route('/questionnaire/')
+
+        .get(function (req, res) {
+            console.log('get questionnaire')
+            res.status(200).json(JSON.parse(fs.readFileSync(questionnaire_data)));
+        })
+
+        .post(function (req, res) {
+            console.log('questionnaire submitted');
+            res.status(200).json(addUserData(req.body));
+        })
+
+}
