@@ -1,4 +1,5 @@
 export default {
   questionnaire: null,
-  selectedAnswers: []
+  selectedAnswers: [],
+  userData: null
 };

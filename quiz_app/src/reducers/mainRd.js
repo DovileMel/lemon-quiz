@@ -6,10 +6,18 @@ export default (state = initialState, action) => {
   switch (action.type) {
 
     case actionTypes.FETCH_DATA: {
-      const {questionnaire} = action
+      const { questionnaire } = action
       return {
         ...state,
         questionnaire
+      };
+    }
+    case actionTypes.GET_USER_DATA: {
+      console.log(action)
+      //const { userData1 } = action
+      return {
+        ...state,
+        userData: action.userInfo
       };
     }
     case actionTypes.SELECT_ANSWER: {
@@ -18,6 +26,7 @@ export default (state = initialState, action) => {
         selectedAnswers: { ...state.selectedAnswers, [action.question]: action.answers }
       };
     }
+
   }
   return state
 }

@@ -39,8 +39,7 @@ class Question extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    //console.log(this.state.checkedBox)
-    const {value} = this.state;
+    const { value } = this.state;
     if (prevState.value !== value) {
       const { actions } = this.props;
       actions.selectAnswer(this.props.question_data.question, this.state.value);
@@ -50,31 +49,25 @@ class Question extends React.PureComponent {
   handleChange = event => {
     const selectedValue = event.target.value;
 
-    if(this.state.checkedBox[selectedValue] === true) {
+    if (this.state.checkedBox[selectedValue] === true) {
       const filteredSelectedResults = this.state.value.filter(results => results !== selectedValue);
       console.log(filteredSelectedResults)
       this.setState({
         value: filteredSelectedResults,
-        checkedBox: {...this.state.checkedBox, [selectedValue]: !this.state.checkedBox[selectedValue]}
+        checkedBox: { ...this.state.checkedBox, [selectedValue]: !this.state.checkedBox[selectedValue] }
       })
     } else {
-       //check if radio button ir checkbox is selected
-    this.state.multipleCorrectAnswer ?
-    this.setState({
-      value: [...this.state.value, selectedValue],
-      checkedBox: {...this.state.checkedBox, [selectedValue]: !this.state.checkedBox[selectedValue]}
-    })
-
-    :
-    this.setState({
-     value: selectedValue
-    })
+      //check if radio button or checkbox is selected
+      this.state.multipleCorrectAnswer ?
+        this.setState({
+          value: [...this.state.value, selectedValue],
+          checkedBox: { ...this.state.checkedBox, [selectedValue]: !this.state.checkedBox[selectedValue] }
+        })
+        :
+        this.setState({
+          value: selectedValue
+        })
     }
-
-
-
-
-
 
   };
 
@@ -90,7 +83,7 @@ class Question extends React.PureComponent {
                 <FormControlLabel
                   control={
                     <Checkbox
-                    onChange={this.handleChange}
+                      onChange={this.handleChange}
                       value={choice}
                       key={choice}
                     />

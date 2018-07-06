@@ -18,14 +18,22 @@ export const getDataArr = () => (dispatch) => {
 }
 
 export const selectAnswer = (question, answers) => {
-const ara = Object.assign({}, {[question]: answers})
   return {
     type: actionTypes.SELECT_ANSWER,
-    //updatedAnswer: {[question]: answer}
     question,
     answers
   }
 }
+
+export const getUser = (userInfo) => {
+  console.log(userInfo)
+  return {
+    type: actionTypes.GET_USER_DATA,
+    userInfo
+  }
+}
+
+
 
 
 
