@@ -25,12 +25,38 @@ export const selectAnswer = (question, answers) => {
   }
 }
 
-export const getUser = (userInfo) => {
-  console.log(userInfo)
-  return {
-    type: actionTypes.GET_USER_DATA,
-    userInfo
+export const submitUserAnswers = (userInfo, userAnswers) => (dispatch) => {
+  let result = null;
+
+  const submittedData = {
+    user_data: userInfo,
+    questionnaire: {
+      answered: true,
+      questions: userAnswers
+    }
   }
+
+  fetch("http://localhost:3002/api/questionnaire",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"},
+      body: JSON.stringify(submittedData)
+    })
+    .then(res => res.json())
+    .then((data) => {
+      dispatch({
+        type: actionTypes.GET_USER_DATA,
+        userInfo,
+        result: data
+      });
+      return Promise.resolve(data);
+    })
+    .catch((error) => {
+      throw new Error(error);
+    });
+
+
 }
 
 

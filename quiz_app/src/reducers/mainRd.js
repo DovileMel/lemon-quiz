@@ -13,17 +13,19 @@ export default (state = initialState, action) => {
       };
     }
     case actionTypes.GET_USER_DATA: {
-      console.log(action)
+      console.log(action);
+      const { result } = action
       //const { userData1 } = action
       return {
         ...state,
-        userData: action.userInfo
+        userData: action.userInfo,
+        result
       };
     }
     case actionTypes.SELECT_ANSWER: {
       return {
         ...state,
-        selectedAnswers: { ...state.selectedAnswers, [action.question]: action.answers }
+        selectedAnswers: { ...state.selectedAnswers, [action.question]: action.answers },
       };
     }
 

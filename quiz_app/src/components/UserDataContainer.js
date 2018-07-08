@@ -26,7 +26,7 @@ class UserDataContainer extends React.PureComponent {
 
   handleSubmit = (event) => {
     const { actions } = this.props;
-    actions.getUser(this.state.userInfo)
+    actions.submitUserAnswers(this.state.userInfo, this.props.selectedAnswers)
   }
 
   componentDidUpdate(prevProps, prevState) {

@@ -1,5 +1,4 @@
 import React from "react";
-import '../styles/style.scss';
 import { withStyles } from '@material-ui/core/styles';
 import * as actions from '../actions/actions';
 import { bindActionCreators } from 'redux';
@@ -89,6 +88,7 @@ class Question extends React.PureComponent {
                     />
                   }
                   label={choice}
+                  key={choice}
                 />
               )}
             </FormGroup>

@@ -20,7 +20,6 @@ app.use(bodyParser.json());
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("ETag", "*");
-    res.header("Cache-Control", "*");
     res.header("Content-Location", "*");
     res.header("Date", "*");
     res.header("Expires", "*");
