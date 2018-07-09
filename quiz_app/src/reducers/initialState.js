@@ -2,5 +2,5 @@ export default {
   questionnaire: null,
   selectedAnswers: [],
   userData: null,
-  result: []
+  result: null
 };

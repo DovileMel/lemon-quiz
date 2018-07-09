@@ -12,7 +12,7 @@ class UserDataContainer extends React.PureComponent {
 
   state = {
     userInfo: [],
-    isNotCompleted: true
+    notCompleted: true,
   }
 
   handleUserData = (field, value) => {
@@ -31,14 +31,21 @@ class UserDataContainer extends React.PureComponent {
 
   componentDidUpdate(prevProps, prevState) {
     const { userInfo } = this.state;
+    const { result } = this.props;
+    if (prevProps.result !== result) {
+      this.setState({
+        notCompleted: true,
+      })
+    }
     if (prevState.userInfo !== userInfo) {
       const checkRequiredData = Object.keys(this.state.userInfo).length;
       if (checkRequiredData > 1) {
         this.setState({
-          isNotCompleted: false
+          notCompleted: false
         })
       }
     }
+
   }
 
   render() {
@@ -56,12 +63,15 @@ class UserDataContainer extends React.PureComponent {
           inputLabel="Your email address"
           updateInputValue={this.handleUserData}
         />
-        <Button variant="contained" disabled={this.state.isNotCompleted} color="primary" onClick={this.handleSubmit}>
+        <Button variant="contained"
+          disabled={this.state.notCompleted}
+          color="primary"
+          onClick={this.handleSubmit}>
           Submit
       </Button>
-      {this.props.userData !== null &&
+        {this.props.userData !== null &&
           <h3>Thank you for your answers!</h3>
-      }
+        }
       </div>
     );
   }

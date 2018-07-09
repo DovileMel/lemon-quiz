@@ -3,15 +3,47 @@ const questionnaire_data = 'data/questionnaire.txt';
 const users_data = 'data/users_answers.txt';
 const getResult = require('../calculations/calculations.js');
 
+function getRanking(body){
+    let rankingResult = null;
+    let all_users_data = JSON.parse(fs.readFileSync(users_data));
+    const userRanking = body.result;
+    console.log(userRanking);
+    const allUsersResult = all_users_data.map(res => res.result);
+    const sortedResults = allUsersResult.sort().reverse();
+    const ranking = sortedResults.indexOf(userRanking);
+    console.log(sortedResults);
+    console.log(ranking);
+    const maxResult = Math.max(...sortedResults);
+    if (ranking === -1){
+        if(userRanking > maxResult){
+            rankingResult = 1;
+        } else {
+            rankingResult = sortedResults.length
+        }
+    } else {
+        rankingResult = ranking + 1
+    }
+    return Object.assign({}, body, {ranking: rankingResult});
+}
+
+function calc(body, ranking, addUser){
+    const calculatedResults = getResult.calculateResult(body, JSON.parse(fs.readFileSync(questionnaire_data)));
+    const addResults = Object.assign({}, body, calculatedResults);
+    const rankingRes = ranking(addResults);
+   console.log(addUser(addResults));
+    return rankingRes;
+}
+
+
 function addUserData(body) {
+    
     let all_users_data = JSON.parse(fs.readFileSync(users_data));
     all_users_data.push(body);
     let file = fs.createWriteStream(users_data);
-    file.write(JSON.stringify(all_users_data));
-    file.end();
-    return getResult.calculateResult(body, JSON.parse(fs.readFileSync(questionnaire_data)) );
+   file.write(JSON.stringify(all_users_data));
+   file.end();
+   return "results are stored"
 }
-
 
 module.exports = function (router) {
 
@@ -24,7 +56,7 @@ module.exports = function (router) {
 
         .post(function (req, res) {
             console.log('questionnaire submitted');
-            res.status(200).json(addUserData(req.body));
+            res.status(200).json(calc(req.body, getRanking, addUserData));
         })
 
 }

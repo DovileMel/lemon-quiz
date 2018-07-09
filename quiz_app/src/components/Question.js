@@ -27,6 +27,7 @@ class Question extends React.PureComponent {
     const answersArrByKeys = this.props.question_data.possible_answers.map(answ => String(Object.keys(answ)));
     //make array of all possible answers VALUES
     const answersArrByValues = this.props.question_data.possible_answers.map(value => String(Object.values(value)))
+
     //check if question has more that one correct answer
     const correctAnswers = answersArrByValues.filter(correct => correct === 'true').length;
     const multipleCorrectAns = correctAnswers > 1 ? true : false;
@@ -70,6 +71,22 @@ class Question extends React.PureComponent {
 
   };
 
+  findAnswer = (ans) => {
+    const findQuestionByKey = this.props.question_data.possible_answers.filter(answ => String(Object.keys(answ)) === ans);
+    const answerValue = String(Object.values(findQuestionByKey[0]));
+    return (
+      <span>
+        {this.props.result ?
+          <span className={`answer ${answerValue === 'true' ? 'green' : 'red'}`}>
+            {ans}
+          </span>
+          :
+          <span> {ans} </span>
+        }
+      </span>
+    );
+  }
+
   render() {
     const { question_data } = this.props;
     return (
@@ -87,7 +104,7 @@ class Question extends React.PureComponent {
                       key={choice}
                     />
                   }
-                  label={choice}
+                  label={this.findAnswer(choice)}
                   key={choice}
                 />
               )}
@@ -97,7 +114,7 @@ class Question extends React.PureComponent {
               {this.state.allAnswers.map(choice =>
                 <FormControlLabel value={choice}
                   control={<Radio />}
-                  label={choice}
+                  label={this.findAnswer(choice)}
                   key={choice}
                 />
               )

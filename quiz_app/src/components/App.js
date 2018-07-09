@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Question from './Question';
 import UserDataContainer from './UserDataContainer';
+import ResultContainer from './ResultContainer';
 
 class App extends React.PureComponent {
 
@@ -26,6 +27,7 @@ class App extends React.PureComponent {
          {this.props.questionnaire && this.props.questionnaire[0].questions.map((quest, index) => <Question question_data={quest} key={index}/>)
          }
          <UserDataContainer/>
+         {this.props.result && <ResultContainer resultData={this.props.result}/>}
           </main>
       </div>
     );

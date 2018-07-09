@@ -32,9 +32,7 @@ module.exports.calculateResult = (userData, questionnaire) => {
             const userAnswers = Object.values(userData.questionnaire.questions[question]);
             compareResults = userAnswers.map(ans => {
                 const answerIndex= corrAnswersArray.indexOf(ans);
-                
                     combinedResults.push(answerIndex) 
-                
             })
 
             checkCombinedResult = () => {
