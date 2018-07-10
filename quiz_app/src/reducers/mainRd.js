@@ -13,9 +13,7 @@ export default (state = initialState, action) => {
       };
     }
     case actionTypes.GET_USER_DATA: {
-      console.log(action);
       const { result } = action
-      //const { userData1 } = action
       return {
         ...state,
         userData: action.userInfo,

@@ -1,6 +1,5 @@
 import React from "react";
 import '../styles/style.scss';
-import { withStyles } from '@material-ui/core/styles';
 import * as actions from '../actions/actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -12,6 +11,7 @@ import ResultContainer from './ResultContainer';
 class App extends React.PureComponent {
 
   componentDidMount = () => {
+    //fetch questionnaire from the server
     const { actions } = this.props;
     actions.getDataArr();
   }
@@ -22,20 +22,22 @@ class App extends React.PureComponent {
         <header>
           <h1>Welcome to the Quiz!</h1>
           <h2>Answer these simple questions and get the results</h2>
-          </header>
-          <main>
-         {this.props.questionnaire && this.props.questionnaire[0].questions.map((quest, index) => <Question question_data={quest} key={index}/>)
-         }
-         <UserDataContainer/>
-         {this.props.result && <ResultContainer resultData={this.props.result}/>}
-          </main>
+        </header>
+        <main>
+          {this.props.questionnaire && this.props.questionnaire[0].questions.map((quest, index) => <Question question_data={quest} key={index} />)
+          }
+          <UserDataContainer />
+          {this.props.result && <ResultContainer resultData={this.props.result} />}
+        </main>
       </div>
     );
   }
 }
 
 App.propTypes = {
-  children: PropTypes.element
+  actions: PropTypes.object,
+  questionnaire: PropTypes.arrayOf(PropTypes.object),
+  result: PropTypes.object
 };
 
 const stateToProps = ({ mainRd }) => ({

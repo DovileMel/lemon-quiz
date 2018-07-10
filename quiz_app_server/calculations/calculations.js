@@ -1,9 +1,9 @@
-module.exports.calculateResult = (userData, questionnaire) => {
-    let result = null;
+module.exports.calculateResult = (userData, allQuestionnaire) => {
+    let result = 0;
     let correctlyAnsweredQuestions = [];
 
     //get array of all possible questions (question + possible answers)
-    const questionsArray = questionnaire[0].questions.map(quest => quest);
+    const questionsArray = allQuestionnaire[0].questions.map(quest => quest);
 
     //get array of questions, answered by user
     const userAnsweredQuestions = Object.keys(userData.questionnaire.questions);

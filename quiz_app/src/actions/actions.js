@@ -26,8 +26,6 @@ export const selectAnswer = (question, answers) => {
 }
 
 export const submitUserAnswers = (userInfo, userAnswers) => (dispatch) => {
-  let result = null;
-
   const submittedData = {
     user_data: userInfo,
     questionnaire: {
@@ -40,7 +38,8 @@ export const submitUserAnswers = (userInfo, userAnswers) => (dispatch) => {
     {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"},
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(submittedData)
     })
     .then(res => res.json())

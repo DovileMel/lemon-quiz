@@ -1,10 +1,8 @@
 import React from "react";
-import { withStyles } from '@material-ui/core/styles';
 import * as actions from '../actions/actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
 import InputBox from './InputBox';
 import Button from '@material-ui/core/Button';
 
@@ -24,7 +22,7 @@ class UserDataContainer extends React.PureComponent {
     })
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = () => {
     const { actions } = this.props;
     actions.submitUserAnswers(this.state.userInfo, this.props.selectedAnswers)
   }
@@ -32,13 +30,13 @@ class UserDataContainer extends React.PureComponent {
   componentDidUpdate(prevProps, prevState) {
     const { userInfo } = this.state;
     const { result } = this.props;
-    if (prevProps.result !== result) {
+    if (prevProps.result !== result && prevProps.result !== result) {
       this.setState({
         notCompleted: true,
       })
     }
     if (prevState.userInfo !== userInfo) {
-      const checkRequiredData = Object.keys(this.state.userInfo).length;
+      const checkRequiredData = Object.keys(userInfo).length;
       if (checkRequiredData > 1) {
         this.setState({
           notCompleted: false
@@ -50,25 +48,29 @@ class UserDataContainer extends React.PureComponent {
 
   render() {
     return (
-      <div className="user-data-box">
-        <InputBox
-          isRequired={true}
-          inputName="name"
-          inputLabel="Your name"
-          updateInputValue={this.handleUserData}
-        />
-        <InputBox
-          isRequired={true}
-          inputName="email"
-          inputLabel="Your email address"
-          updateInputValue={this.handleUserData}
-        />
-        <Button variant="contained"
-          disabled={this.state.notCompleted}
-          color="primary"
-          onClick={this.handleSubmit}>
-          Submit
+      <div className="user-data">
+        <div className="input-fields">
+          <InputBox
+            isRequired={true}
+            inputName="name"
+            inputLabel="Your name"
+            updateInputValue={this.handleUserData}
+          />
+          <InputBox
+            isRequired={true}
+            inputName="email"
+            inputLabel="Your email address"
+            updateInputValue={this.handleUserData}
+          />
+        </div>
+        {this.props.selectedAnswers &&
+          <Button variant="contained"
+            disabled={this.state.notCompleted}
+            color="primary"
+            onClick={this.handleSubmit}>
+            Submit
       </Button>
+        }
         {this.props.userData !== null &&
           <h3>Thank you for your answers!</h3>
         }
@@ -78,7 +80,10 @@ class UserDataContainer extends React.PureComponent {
 }
 
 UserDataContainer.propTypes = {
-  children: PropTypes.element
+  actions: PropTypes.object,
+  userData: PropTypes.object,
+  selectedAnswers: PropTypes.object,
+  result: PropTypes.object
 };
 
 const stateToProps = ({ mainRd }) => ({

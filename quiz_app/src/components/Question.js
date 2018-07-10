@@ -1,12 +1,10 @@
 import React from "react";
-import { withStyles } from '@material-ui/core/styles';
 import * as actions from '../actions/actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -49,9 +47,9 @@ class Question extends React.PureComponent {
   handleChange = event => {
     const selectedValue = event.target.value;
 
+    //check if answer checkbox is already selected
     if (this.state.checkedBox[selectedValue] === true) {
       const filteredSelectedResults = this.state.value.filter(results => results !== selectedValue);
-      console.log(filteredSelectedResults)
       this.setState({
         value: filteredSelectedResults,
         checkedBox: { ...this.state.checkedBox, [selectedValue]: !this.state.checkedBox[selectedValue] }
@@ -68,22 +66,35 @@ class Question extends React.PureComponent {
           value: selectedValue
         })
     }
-
   };
 
+  //set className of the question depending on whether it was answered correcly or not
+  getQuestion = (quest) => {
+    if (this.props.result) {
+      const allCorrectlyAnsweredQ = this.props.result.correctlyAnsweredQuestions.filter(q => q === quest);
+      if (allCorrectlyAnsweredQ.length) {
+        return "correct-question"
+      } else {
+        return "incorrect-question"
+      }
+    }
+  }
+
+  //render the possible answer;
+  // after submitting results, it is displayed whether answer was correct or not by adding a className
   findAnswer = (ans) => {
     const findQuestionByKey = this.props.question_data.possible_answers.filter(answ => String(Object.keys(answ)) === ans);
     const answerValue = String(Object.values(findQuestionByKey[0]));
     return (
-      <span>
+      <React.Fragment>
         {this.props.result ?
-          <span className={`answer ${answerValue === 'true' ? 'green' : 'red'}`}>
+          <span className={`answer ${answerValue === 'true' ? 'correct-answer' : 'incorrect-answer'}`}>
             {ans}
           </span>
           :
           <span> {ans} </span>
         }
-      </span>
+      </React.Fragment>
     );
   }
 
@@ -92,7 +103,7 @@ class Question extends React.PureComponent {
     return (
       <div className="question_box">
         <FormControl>
-          <FormLabel >{String(question_data.question)}</FormLabel>
+          <FormLabel ><span className={this.getQuestion(question_data.question)}>{String(question_data.question)}</span></FormLabel>
           {this.state.multipleCorrectAnswer ?
             <FormGroup value={String(this.state.value)} >
               {this.state.allAnswers.map(choice =>
@@ -102,6 +113,8 @@ class Question extends React.PureComponent {
                       onChange={this.handleChange}
                       value={choice}
                       key={choice}
+                      color="primary"
+
                     />
                   }
                   label={this.findAnswer(choice)}
@@ -113,9 +126,10 @@ class Question extends React.PureComponent {
             <RadioGroup value={String(this.state.value)} onChange={this.handleChange}>
               {this.state.allAnswers.map(choice =>
                 <FormControlLabel value={choice}
-                  control={<Radio />}
+                  control={<Radio color="primary" />}
                   label={this.findAnswer(choice)}
                   key={choice}
+
                 />
               )
               }
@@ -128,7 +142,15 @@ class Question extends React.PureComponent {
 }
 
 Question.propTypes = {
-  children: PropTypes.element
+  actions: PropTypes.object,
+  question_data: PropTypes.shape({
+    possible_answers: PropTypes.array,
+    question: PropTypes.string,
+  }),
+  result: PropTypes.shape({
+    correctlyAnsweredQuestions: PropTypes.array
+  }),
+
 };
 
 const stateToProps = ({ mainRd }) => ({
