@@ -4,8 +4,7 @@ let bodyParser = require('body-parser');
 let router = express.Router();
 let cors = require('cors');
 
-// allow cross domain connection
-//app.use(cors());
+import path from 'path';
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -13,8 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-//connect routes to application
-// const routes = require('./routes');
+// get reference to the client build directory
+const staticFiles = express.static(path.join(__dirname, '../../quiz_app/dist'))
 
 // allow cross domain connection
 app.use(function(req, res, next) {
@@ -36,6 +35,8 @@ app.use('/api', router);
 
 require('./rest/questionnaire.rest.js')(router);
 
-app.listen(3002, function(){
-    console.log('App listening on port 3002');
+app.set('port', (process.env.PORT || 3002))
+
+app.listen(app.get('port'), function(){
+    console.log(`Listening on ${app.get('port')}`)
 });

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon -r babel-register index.js",
+    "build": "babel . --ignore node_modules,build --out-dir build",
+    "start:prod": "node build/index.js"    
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,16 @@
   },
   "homepage": "https://github.com/DovileMel/quiz-app#readme",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-register": "^6.26.0",
+    "nodemon": "1.17.5"
   }
 }
