@@ -13,7 +13,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // get reference to the client build directory
-const staticFiles = express.static(path.join(__dirname, '../../quiz_app/dist'))
+const staticFiles = express.static(path.join(__dirname, '../../quiz_app/dist'));
+
+// pass the static files (react app) to the express app. 
+app.use(staticFiles);
+
+app.use('/*', staticFiles)
 
 // allow cross domain connection
 app.use(function(req, res, next) {
