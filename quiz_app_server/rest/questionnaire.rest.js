@@ -1,6 +1,6 @@
 const fs = require('fs');
-const questionnaire_data = 'data/questionnaire.txt';
-const users_data = 'data/users_answers.txt';
+const questionnaire_data = './quiz_app_server/data/questionnaire.txt';
+const users_data = './quiz_app_server/data/users_answers.txt';
 const getResult = require('../calculations/calculations.js');
 
 function getRanking(body) {
