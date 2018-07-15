@@ -43,7 +43,7 @@ app.use(function(req, res, next) {
 
 app.use('/api', router);
 
-require('./quiz_app_server/rest/questionnaire.rest.js')(router);
+require('./quiz_app_server/rest/questionnaire.js')(router);
 
 app.set('port', (process.env.PORT || 3002))
 
