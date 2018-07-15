@@ -1,7 +1,8 @@
 import * as actionTypes from './actionTypes';
+const serverURL = 'https://lemon-quiz.herokuapp.com/api/questionnaire';
 
 export const getDataArr = () => (dispatch) => {
-  fetch('http://localhost:3002/api/questionnaire', {
+  fetch(serverURL, {
     method: 'GET'
   })
     .then((res) => res.json())
@@ -34,11 +35,11 @@ export const submitUserAnswers = (userInfo, userAnswers) => (dispatch) => {
     }
   }
 
-  fetch("http://localhost:3002/api/questionnaire",
+  fetch(serverURL,
     {
       method: "POST",
       headers: {
-        'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(submittedData)
     })

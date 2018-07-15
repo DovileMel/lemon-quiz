@@ -6,11 +6,11 @@ let cors = require('cors');
 const PORT = process.env.PORT || 3002;
 let path = require('path');
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-
 // parse application/json
 app.use(bodyParser.json());
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // get reference to the client build directory
 const staticFiles = express.static(path.join(__dirname, '/quiz_app/dist'));

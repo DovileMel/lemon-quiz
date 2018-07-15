@@ -24,6 +24,7 @@ function getRanking(body) {
 }
 
 function calc(body, ranking, addUser) {
+    console.log(body);
     const questionnaire = JSON.parse(fs.readFileSync(questionnaire_data));
     const calculatedResults = getResult.calculateResult(body, questionnaire);
     const addResults = Object.assign({}, body, calculatedResults);
@@ -33,7 +34,6 @@ function calc(body, ranking, addUser) {
 }
 
 function addUserData(body) {
-
     let all_users_data = JSON.parse(fs.readFileSync(users_data));
     all_users_data.push(body);
     let file = fs.createWriteStream(users_data);
