@@ -14,17 +14,9 @@ app.use(bodyParser.json());
 
 // get reference to the client build directory
 const staticFiles = express.static(path.join(__dirname, '/quiz_app/dist'));
-console.log(path.join(__dirname, './quiz_app/dist/index.html'));
 
 // pass the static files (react app) to the express app. 
 app.use(staticFiles);
-
-//app.use('/*', staticFiles)
-
-app.get('/', (_req, res) => {
-  res.sendFile(path.join(__dirname, '/quiz_app/dist/index.html'));
-  console.log(__dirname)
-});
 
 // allow cross domain connection
 app.use(function(req, res, next) {
@@ -41,12 +33,14 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.get('/', (_req, res) => {
+    res.sendFile(path.join(__dirname, '/quiz_app/dist/index.html'));
+    console.log(__dirname)
+  });
 
 app.use('/api', router);
 
 require('./quiz_app_server/rest/questionnaire.js')(router);
-
-app.set('port', (process.env.PORT || 3002))
 
 app.listen(PORT, (err) => {
     if (err) {
