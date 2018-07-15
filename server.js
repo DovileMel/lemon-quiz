@@ -26,7 +26,7 @@ app.use(function(req, res, next) {
     res.header("Date", "*");
     res.header("Expires", "*");
     res.header("Vary", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
     res.header("Expires", 0);
