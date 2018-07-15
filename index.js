@@ -13,7 +13,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // get reference to the client build directory
-const staticFiles = express.static(path.join(__dirname, './quiz_app/dist'));
+const staticFiles = express.static(path.join(__dirname, '/quiz_app/dist'));
+console.log(path.join(__dirname, '/quiz_app/dist/index.html'));
 
 // pass the static files (react app) to the express app. 
 app.use(staticFiles);
@@ -21,7 +22,7 @@ app.use(staticFiles);
 //app.use('/*', staticFiles)
 
 app.get('/', (_req, res) => {
-  res.sendFile(path.join(__dirname, './quiz_app/dist/index.html'));
+  res.sendFile(path.join(__dirname, '/quiz_app/dist/index.html'));
   console.log(__dirname)
 });
 
