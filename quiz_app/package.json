@@ -1,7 +1,7 @@
 {
   "name": "quiz-app",
   "version": "7.0.1",
-  "proxy": "http://localhost:3002",
+  "proxy": "//localhost:3002",
   "description": "Simple quiz app",
   "engines": {
     "npm": ">=3"
@@ -38,6 +38,7 @@
     "object-assign": "4.1.0",
     "react": "16.4.1",
     "react-dom": "16.2.0",
+    "react-meta-tags": "0.4.1",
     "react-redux": "5.0.5",
     "react-router-dom": "4.2.2",
     "react-router-redux": "5.0.0-alpha.6",
